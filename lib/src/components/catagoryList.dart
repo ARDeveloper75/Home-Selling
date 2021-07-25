@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:ui_one/src/configs/textTheme.dart';
-import 'package:ui_one/src/controllers/itemData.dart';
+import 'package:ui_one/src/models/product.dart';
 
 class CatagoryList extends StatelessWidget {
-  final data = Get.put(ItemData(), permanent: true);
-
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
@@ -21,9 +18,9 @@ class CatagoryList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: false,
-          itemCount: data.catagory.length,
+          itemCount: Product.catagory.length,
           itemBuilder: (BuildContext context, int index) {
-            final item = data.catagory[index];
+            final item = Product.catagory[index];
             return Padding(
               padding: EdgeInsets.all(8.0),
               child: Container(

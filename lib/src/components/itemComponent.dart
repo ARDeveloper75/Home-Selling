@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_one/src/configs/textTheme.dart';
-import 'package:ui_one/src/controllers/itemData.dart';
+import 'package:ui_one/src/models/product.dart';
+
 import 'package:ui_one/src/pages/detailsPage.dart';
 
 class ItemComponent extends StatelessWidget {
-  final data = Get.put(ItemData(), permanent: true);
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+
     return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         primary: false,
-        itemCount: data.productData.length,
+        itemCount: Product.allProducts.length,
         itemBuilder: (BuildContext context, int index) {
-          final item = data.productData[index];
+          final product = Product.allProducts[index];
 
           return GestureDetector(
             onTap: () {
               Get.to(
                 DetailsPage(
-                  product: item,
+                  products: product,
                 ),
               );
             },
@@ -44,7 +45,7 @@ class ItemComponent extends StatelessWidget {
                           child: Column(
                             children: [
                               Image.asset(
-                                '${item['image']}',
+                                '${product.image}',
                               ),
                             ],
                           ),
@@ -76,7 +77,7 @@ class ItemComponent extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 20),
                         child: Text(
-                          '\$${item['price']}',
+                          '\$${product.price}',
                           style: themeData.textTheme.headline1,
                         ),
                       ),
@@ -84,7 +85,7 @@ class ItemComponent extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        '${item['address']}',
+                        '${product.address}',
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -99,11 +100,11 @@ class ItemComponent extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'bedrooms ${item['bedrooms']} / ',
+                          'bedrooms ${product.bedrooms} / ',
                           style: themeData.textTheme.headline5,
                         ),
                         Text(
-                          'bathrooms ${item['bathrooms']} / ',
+                          'bathrooms ${product.bathrooms} / ',
                           style: themeData.textTheme.headline5,
                         ),
                         Text(

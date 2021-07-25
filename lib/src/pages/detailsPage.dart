@@ -4,9 +4,9 @@ import 'package:ui_one/src/configs/textTheme.dart';
 import 'package:ui_one/src/models/product.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Product? product;
+  final Product? products;
   DetailsPage({
-    this.product,
+    this.products,
   });
 
   @override
@@ -24,7 +24,7 @@ class DetailsPage extends StatelessWidget {
             ),
             Stack(
               children: [
-                Image.asset('assets/img/home-1.jpg'),
+                Image.asset('${products!.image}'),
                 Positioned(
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -72,15 +72,19 @@ class DetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '\$2000000',
-                      style: themeData.textTheme.headline1,
+                    Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        '\$${products!.price}',
+                        style: themeData.textTheme.headline1,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
-                        'Mirpur, Road 2201, BD',
+                        '${products!.address}',
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -134,19 +138,19 @@ class DetailsPage extends StatelessWidget {
               child: Row(
                 children: [
                   HomeInfo(
-                    content: "1416",
+                    content: "${products!.area}",
                     name: "Square Foot",
                   ),
                   HomeInfo(
-                    content: "5",
+                    content: "${products!.bedrooms}",
                     name: "Bedrooms",
                   ),
                   HomeInfo(
-                    content: "2",
+                    content: "${products!.bathrooms}",
                     name: "Bathrooms",
                   ),
                   HomeInfo(
-                    content: "1",
+                    content: "${products!.garage}",
                     name: "Garage",
                   )
                 ],
@@ -158,7 +162,7 @@ class DetailsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 20, right: 20),
               child: Text(
-                '${product!.description}',
+                '${products!.description}',
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: 'Montserrat',
